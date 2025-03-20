@@ -1,45 +1,42 @@
-
-### 🎨🖌 Creating Art with the help of Artificial Intelligence !
-
-**🔥 Official Website :** https://share.streamlit.io/deepeshdm/pixelmix/main/App.py
+**Creating Digital Art with the Power of Artificial Intelligence!🎨🖌**
+Consider yourself an artist struggling for inspiration. You admire Van Gogh's distinctive style but can't quite capture his magic. That's where our technology steps in.
+Using Generative Adversarial Networks, we blend your creative vision with Van Gogh's artistic genius. It's simple:
+Your idea (content image) + Van Gogh's style (style image) = Your painting in Van Gogh's style
+Our design analyzes both images - capturing what makes your composition unique while learning Van Gogh's brushstrokes, color palette, and textures. The result? Your artistic vision expressed through Van Gogh's eyes.
 
 <div align="center">
   <img src="/Imgs/website.gif" width="90%"/>
 </div>
 </br>
 
-Neural Style Transfer (NST) refers to a class of software algorithms that manipulate digital images, or videos, in order to adopt the appearance or visual style of another image. NST algorithms are characterized by their use of deep neural networks for the sake of image transformation. Popular use cases for NST are the creation of artificial artwork from photographs, for example by transferring the appearance of famous paintings to user-supplied photographs.
+Image style transfer is a computer vision technique that involves applying the artistic style of one image (the style image) to another image (the content image) while preserving the structure of the content image. This technique is based on deep learning and leverages convolutional neural networks (CNNs), particularly pre-trained models like VGG-19.
 
 <br> <!-- line break -->
 
 <div align="center">
-<img src="/Imgs/nst.png"/>
+<img src="C:\Users\gayat\Downloads\A Couple Walking in an Autumn Forest.jpg"/>
 </div>
 
 <br> <!-- line break -->
 
 
-## 🎯 Objective 
-The main goal of this project is to explore Neural-style-transfer through implementation. We'll Implement a NST model using Tensorflow and keras, and at the end of the project we'll deploy it as a web app so that anyone can create stunning digital art which they could even sell as NFT's.
+🎯 Objective 
+This project aims to explore Neural Style Transfer through hands-on implementation. We will create a Neural Style Transfer model using TensorFlow and Keras. At the end of this project, we will deploy the model as a web application so that users can easily create digital artwork, which could even be used as NFTs.
 
-
-## 📝 Summary of Neural Style Transfer
-
-Style transfer is a computer vision technique that takes two images — a "content image" and "style image" — and blends them together so that the resulting output image retains the core elements of the content image, but appears to be “painted” in the style of the style reference image. Training a style transfer model requires two networks,which follow a encoder-decoder architecture : 
-- A pre-trained feature extractor 
-- A transfer network
+📝 Summary of Neural Style Transfer
+Style Transfer is a computer vision approach where two images—one representing the content and the other representing the style—are combined. The output image retains the fundamental content of the first image but appears in the style of the second image. The process typically involves training a neural network with two essential components:
+1) A pre-trained feature extractor
+2) A style transfer network
 
 
 <div align="center">
-<img src="/Imgs/nst architecture.jpg" width="80%"/>
+<img src="C:\Users\gayat\Downloads\art-4.jpg" width="75%"/>
 </div>
 
 <br> <!-- line break -->
 
 
-
-The ‘encoding nature’ of CNN’s is the key in Neural Style Transfer. Firstly, we initialize a noisy image, which is going to be our output image(G). We then calculate how similar is this image to the content and style image at a particular layer in the network(VGG network). Since we want that our output image(G) should have the content of the content image(C) and style of style image(S) we calculate the loss of generated image(G) w.r.t to the respective content(C) and style(S) image.
-
+The key idea behind Neural Style Transfer is to optimize the output image to minimize both content loss and style loss. Content loss ensures that the essential features of the content image are preserved, while style loss ensures the output mimics the style of the reference image.
 
 
 <div align="center">
@@ -49,23 +46,19 @@ The ‘encoding nature’ of CNN’s is the key in Neural Style Transfer. Firstl
 <br> <!-- line break -->
 
 
-In simple words,we optimize our NST models to reduce the 'content loss' and the 'style loss'. The content loss function ensures that the activations of the higher layers are similar between the content image and the generated image. The style loss function makes sure that the correlation of activations in all the layers are similar between the style image and the generated image.
 
 
 ## 👨‍💻 Implementation
 
-Early versions of NST treated the task as an optimization problem, requiring hundreds or thousands of iterations to perform style transfer on a single image. To tackle this inefficiency, researchers developed what’s referred to as "Fast Neural Style Transfer". Fast style transfer also uses deep neural networks but trains a standalone model to transform any image in a single, feed-forward pass. Trained models can stylize any image with just one iteration through the network, rather than thousands.State-of-the-art style transfer models can even learn to imprint multiple styles via the same model so that a single input content image can be edited in any number of creative ways.
+In the past, Neural Style Transfer required an extensive number of iterations to apply a style to a single image. However, researchers have developed an optimized approach called Fast Neural Style Transfer. This approach uses a trained model to transform any image in a single, fast feed-forward pass, dramatically reducing the time and computational resources required.
 
-In this project we used a pre-trained "Arbitrary Neural Artistic Stylization Network" - a Fast-NST architecture which you can find [here](https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2). The model is successfully trained on a corpus of roughly 80,000 paintings and is able to generalize to paintings previously unobserved.
+In this project, we use a pre-trained "Generative Adversarial Network"—a Fast-NST architecture that was trained on a collection of over 80,000 paintings. The model generalizes well, even for paintings that weren’t in the training set.
 
-
-## To run locally
+How to Run Locally
 
 1. Download the pre-trained TF model.
 
-    - The 'model' directory already contains the pre-trained model,but you can also download the pre-trained model from [here](https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2).
-
-2. Import this repository using git command
+2. Clone the Repository:
 ```
 git clone https://github.com/deepeshdm/Neural-Style-Transfer.git
 ```
@@ -74,25 +67,36 @@ git clone https://github.com/deepeshdm/Neural-Style-Transfer.git
 pip install -r requirements.txt
 ```
 4. Copy the below code snippet and pass the required variable values
-```python
-import matplotlib.pylab as plt
+ ~~~ python
+
+import matplotlib.pyplot as plt
+import numpy as np
 from API import transfer_style
 
-# Path of the downloaded pre-trained model or 'model' directory
-model_path = r"C:\Users\Desktop\magenta_arbitrary-image-stylization-v1-256_2"
+if __name__ == "__main__":  # Correcting this line
+    model_path = r"C:\GAN\Hi\Hlo\model"
+    content_image_path = r"C:\GAN\Hi\Hlo\Imgs\content1.jpg"
+    style_image_path = r"C:\GAN\Hi\Hlo\Imgs\art3.png"
 
-# NOTE : Works only for '.jpg' and '.png' extensions,other formats may give error
-content_image_path = r"C:\Users\Pictures\my_pic.jpg"
-style_image_path = r"C:\Users\Desktop\images\mona-lisa.jpg"
+    # Transfer the style
+    img = transfer_style(content_image_path, style_image_path, model_path)
 
-img = transfer_style(content_image_path,style_image_path,model_path)
-# Saving the generated image
-plt.imsave('stylized_image.jpeg',img)
-plt.imshow(img)
-plt.show()
-```
+    # Ensure correct shape for saving and display
+    img = np.clip(img, 0, 1)  # Ensure values are in range [0, 1]
 
-## 🔥 Web Interface & API
+    output_path = r"C:\GAN\Hi\Hlo\stylized_image.jpg"
+    plt.imsave(output_path, img)
+
+    print(f"Stylized image saved at: {output_path}")
+
+    # Display the image
+    plt.imshow(img)
+    plt.axis("off")  # Hide axes
+    plt.show()
+~~~
+
+
+Web Interface & API
 
 In order to make it easy for anyone to interact with the model,we created a clean web interface using Streamlit and deployed it on their official cloud space.
 
@@ -126,12 +130,10 @@ In order to make it easy for anyone to interact with the model,we created a clea
 <img src="/Imgs/art4.png" width="35%"/>
 </div>
 
-References :
-- https://arxiv.org/abs/1508.06576 
-- https://keras.io/examples/generative/neural_style_transfer/ 
-- https://arxiv.org/abs/1705.06830 
-- https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2 
-
+References
+Neural Style Transfer Paper
+Keras Neural Style Transfer Example
+Generative Adversarial Networks
 
 
 
